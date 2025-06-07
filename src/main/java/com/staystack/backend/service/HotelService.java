@@ -1,6 +1,7 @@
 package com.staystack.backend.service;
 
 import com.staystack.backend.dto.HotelDto;
+import com.staystack.backend.dto.HotelInfoDto;
 
 
 public interface HotelService {
@@ -11,4 +12,5 @@ public interface HotelService {
     void deleteHotelById(Long id);
 
     void activateHotel(Long hotelId);
+    HotelInfoDto getHotelInfoById(Long hotelId);
 }

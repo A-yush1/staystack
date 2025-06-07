@@ -3,8 +3,7 @@ package com.staystack.backend.entity;
 import com.staystack.backend.entity.enums.BookingStatus;
 import com.staystack.backend.entity.enums.PaymentStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -16,6 +15,9 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +42,7 @@ public class Booking {
     private LocalDate checkInDate;
 
     @Column(nullable = false)
-    private LocalDate checkoutDate;
+    private LocalDate checkOutDate;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -48,9 +50,6 @@ public class Booking {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -63,6 +62,9 @@ public class Booking {
             inverseJoinColumns = @JoinColumn(name = "guest_id")
     )
     private Set<Guest> guests;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal amount;
 
 
 
